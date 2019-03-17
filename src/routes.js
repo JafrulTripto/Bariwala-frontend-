@@ -1,22 +1,21 @@
 
-import Team from "./components/Team";
-import Projects from "./components/Projects";
-import Dashboard from "./components/Dashboard";
+import Signup from "./components/SignUp";
+import Dashboard from "./components/Dashboard"
+import SignIn from "./components/SignIn"
 
 export default [
     {
-        path:'/',
+        path:'/signUp',
+        component:Signup,
+    },
+    {
+        path:'/dashboard',
         component:Dashboard,
     },
-
     {
-        path:'/projects',
-        component:Projects,
+        path:'/',
+        component:SignIn,
     },
-    {
-        path:'/team',
-        component:Team,
-    }
 ]
 
 

@@ -14,6 +14,14 @@
         </v-toolbar>
 
         <v-navigation-drawer v-model="drawer" app class="light-blue darken-3">
+            <v-layout column align-center>
+                <v-flex class="mt-5">
+                    <v-avatar size="100">
+                        <img src="../assets/avatar-1.png" alt="">
+                    </v-avatar>
+                    <p class="white--text subheading mt-1 text-md-justify">Jafrul Hossain</p>
+                </v-flex>
+            </v-layout>
             <v-list>
                 <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
                     <v-list-tile-action>
@@ -29,6 +37,8 @@
 </template>
 
 <script>
+
+
     export default {
         name: "Navbar",
 
@@ -36,12 +46,14 @@
             return{
                 drawer:false,
                 links:[
-                    {icon:'dashboard', text:'Dashboard', route: '/'},
-                    {icon:'folder', text:'My Projects', route: '/projects'},
-                    {icon:'person', text:'Team', route: '/team'},
+                    {icon:'accessibility', text:'Sign up', route: '/signUp'},
+                    {icon:'dashboard', text:'Dashboard', route: '/Dashboard'},
+                    {icon:'folder', text:'Sign In', route: '/'},
                 ]
             }
-        }
+        },
+
+
     }
 </script>
 
