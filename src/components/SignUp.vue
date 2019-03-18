@@ -39,6 +39,19 @@
                                                               :rules="passwordInputRules"
                                                 ></v-text-field>
                                             </v-flex>
+                                            <v-flex md6 sm6 xs12>
+                                                <v-text-field outline label="NID No"
+                                                              v-model="form.nidNo"
+                                                              :rules="nidInputRules"
+                                                ></v-text-field>
+                                            </v-flex>
+                                            <v-flex md6 sm6 xs12>
+                                                <v-text-field outline v-model="phnNumber"
+                                                              :mask="mask"
+                                                              label="Phone Number"
+                                                              :rules="phnNoInputRules"
+                                                ></v-text-field>
+                                            </v-flex>
                                         </v-layout>
                                         <v-layout row wrap>
                                             <v-flex md4 sm6 xs12>
@@ -47,7 +60,18 @@
                                                               :rules="occupationInputRules"
                                                 ></v-text-field>
                                             </v-flex>
-                                            <v-spacer></v-spacer>
+                                            <v-flex md4 sm6 xs12>
+                                                <v-menu>
+                                                    <v-text-field outline :value="formattedBirthDate" label="Birth Date"
+                                                                  append-icon="date_range"
+                                                                  slot="activator"
+                                                                  :rules="birthDateInputRules"
+                                                    ></v-text-field>
+                                                    <v-date-picker v-model="form.birthDate"
+
+                                                    ></v-date-picker>
+                                                </v-menu>
+                                            </v-flex>
                                             <v-flex md4 sm6 xs12>
                                                 <v-text-field outline label="House No"
                                                               v-model="form.houseNo"
@@ -73,24 +97,8 @@
                                                               :rules="districtInputRules"
                                                 ></v-text-field>
                                             </v-flex>
-                                            <v-flex md4 sm6 xs12>
-                                                <v-menu>
-                                                    <v-text-field outline :value="formattedBirthDate" label="Birth Date"
-                                                                  append-icon="date_range"
-                                                                  slot="activator"
-                                                                  :rules="birthDateInputRules"
-                                                    ></v-text-field>
-                                                    <v-date-picker v-model="form.birthDate"
 
-                                                    ></v-date-picker>
-                                                </v-menu>
-                                            </v-flex>
-                                            <v-flex md6 sm6 xs12>
-                                                <v-text-field outline label="NID No"
-                                                              v-model="form.nidNo"
-                                                              :rules="nidInputRules"
-                                                ></v-text-field>
-                                            </v-flex>
+
                                         </v-layout>
                                         <v-btn class="success mx-0 mt3" flat @click="submit">Submit</v-btn>
                                         <v-btn class="warning mx-3 mt3" flat @click.prevent="resetForm">Reset</v-btn>

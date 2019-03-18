@@ -12,8 +12,10 @@ export const authMixins = {
                 houseNo: '',
                 road: '',
                 thana: '',
-                district: ''
+                district: '',
+                phnNumber:''
             },
+            mask: '#####-######',
             nameInputRules:[
                 v => !!v || 'Name is required',
                 v => (v &&v.length>=3) || 'Name must be 3 character'
@@ -48,6 +50,9 @@ export const authMixins = {
             ],
             birthDateInputRules:[
                 v => !!v || 'Birth date is required',
+            ],
+            phnNoInputRules:[
+                v => !!v || 'Phone number is required',
             ],
         }
     },
