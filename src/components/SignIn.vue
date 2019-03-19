@@ -44,7 +44,7 @@
 </template>
 
 <script>
-    import {authMixins} from "../authMixins";
+    import {authMixins} from "../Mixins/authMixins";
 
     export default {
         name: "SignIn",

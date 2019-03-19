@@ -16,7 +16,7 @@ const router = new VueRouter({
   mode:'history'
 })
 
-import {store} from "./store";
+import {store} from "./store/store";
 
 Vue.config.productionTip = false
 
