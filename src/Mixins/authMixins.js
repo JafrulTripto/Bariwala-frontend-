@@ -14,9 +14,8 @@ export const authMixins = {
                 thana: '',
                 district: '',
                 phn_no:'',
-                avatar:''
+                image:''
             },
-            fileName:'',
             mask: '#####-######',
             nameInputRules:[
                 // v => !!v || 'Name is required',

@@ -10,18 +10,6 @@ export const store = new Vuex.Store({
         httpLink: 'http://bariwala.test/api/'
     },
     mutations: {
-        signUp(state) {
-            axios.post(state.httpLink + 'signUp', state.form,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-                .then(function (response) {
-                    console.log(response);
-                }).catch(function (error) {
-                console.log(error);
-            })
-        }
+
     }
 });

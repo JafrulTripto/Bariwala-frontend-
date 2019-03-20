@@ -10,7 +10,7 @@
                     <v-card-text>
                         <v-layout justify-space-around row>
                             <v-flex md10 sm12 xs12>
-                                <v-form ref="signInForm" enctype="multipart/form-data">
+                                <v-form ref="signUpForm" enctype="multipart/form-data">
                                     <v-container>
                                         <v-layout row wrap>
                                             <v-flex md6 row sm6 xs12>
@@ -103,15 +103,15 @@
 
                                                 <v-text-field label="Image (Max 50kb)"
                                                               disabled
-                                                              v-model="fileName">
+                                                              >
                                                 </v-text-field>
                                             <v-btn raised @click="$refs.fileUpload.click()">Upload Image</v-btn>
                                                 <v-flex md4 sm6 xs12>
 
                                                     <input type="file"
+                                                           v-on:change="onImageChange"
                                                            style="display: none"
-                                                           ref="fileUpload"
-                                                           @change="onFileSelected">
+                                                           ref="fileUpload">
                                                 </v-flex>
 
                                         </v-layout>
@@ -139,32 +139,67 @@
 <script>
     import moment from 'moment'
     import {authMixins} from "../Mixins/authMixins";
+    import axios from 'axios'
 
     export default {
         name: "SignUp",
 
         data() {
-            return {}
+            return {
+                form: {
+                    name: '',
+                    email: '',
+                    NID_no: null,
+                    password: '',
+                    confirmPass: '',
+                    date_of_birth: null,
+                    occupation: '',
+                    house_no: '',
+                    road_no: '',
+                    thana: '',
+                    district: '',
+                    phn_no:'',
+                    image:''
+                },
+            }
         },
         mixins:[authMixins],
 
         methods:{
+            onImageChange(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.form.image = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
             submit(){
-                if (this.$refs.signInForm.validate()){
-                    this.$store.state.form=this.form;
-                    console.log(this.form)
-                    this.$store.commit('signUp');
+                console.log(this.form);
+                if (this.$refs.signUpForm.validate()){
+                    axios.post(this.$store.state.httpLink + 'signUp',this.form)
+                        .then(function (response) {
+                            console.log(response);
+                        }).catch(function (error) {
+                        console.log(error);
+                    })
                 }
             },
             onFileSelected(event){
                 if (event.target.files[0].size>50000){
-                    this.form.avatar = 'File is too large';
+                    this.form.image = 'File is too large';
                 }
                 else if (event.target.files[0].name.lastIndexOf('.')<=0) {
-                    this.form.avatar ="Insert a valid file";
+                    this.form.image ="Insert a valid file";
                 }
                 else{
-                    this.form.avatar = event.target.files[0];
+                    this.form.image = event.target.files[0];
                     this.fileName = event.target.files[0].name;
                 }
             }
