@@ -17,7 +17,6 @@
                                             <v-text-field label="Email"
                                                           v-model="form.email"
                                                           prepend-icon="email"
-                                                          :rules="emailInputRules"
                                             ></v-text-field>
                                         </v-flex>
                                         <v-flex md10 sm12 xs12>
@@ -25,12 +24,11 @@
                                                           type="password"
                                                           prepend-icon="security"
                                                           v-model="form.password"
-                                                          :rules="passwordInputRules"
                                             ></v-text-field>
                                         </v-flex>
                                         <v-layout justify-end class="mx-5">
                                             <v-flex md4 sm10 xs10>
-                                                <v-btn class="success mx-0 mt3" flat>Sign in</v-btn>
+                                                <v-btn class="success mx-0 mt3" flat @click="login">Sign in</v-btn>
                                             </v-flex>
                                         </v-layout>
                                     </v-container>
@@ -53,15 +51,26 @@
 </template>
 
 <script>
-    import {authMixins} from "../Mixins/authMixins";
 
     export default {
         name: "SignIn",
-        mixins: [authMixins],
 
         data() {
-            return {}
+            return {
+                form:{
+                    email:'',
+                    password:''
+                }
+            }
         },
+        methods:{
+            login(){
+                this.$store.dispatch('retrieveUserData', this.form)
+                    .then(response=>{
+                        this.$router.push({path:'/dashboard'});
+                    })
+            }
+        }
 
     }
 </script>

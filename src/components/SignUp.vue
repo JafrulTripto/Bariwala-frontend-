@@ -103,8 +103,8 @@
 
                                                 <v-text-field label="Image (Max 50kb)"
                                                               disabled
-                                                              >
-                                                </v-text-field>
+                                                              v-model="imageName"
+                                                ></v-text-field>
                                             <v-btn raised @click="$refs.fileUpload.click()">Upload Image</v-btn>
                                                 <v-flex md4 sm6 xs12>
 
@@ -118,27 +118,18 @@
                                         <v-btn class="success mx-0 mt3" flat @click="submit">Submit</v-btn>
                                         <v-btn class="warning mx-3 mt3" flat @click.prevent="resetForm">Reset</v-btn>
                                     </v-container>
-
-
                                 </v-form>
                             </v-flex>
                         </v-layout>
-
-
                     </v-card-text>
                 </v-card>
             </v-flex>
-
         </v-layout>
-
     </div>
-
-
 </template>
 
 <script>
     import moment from 'moment'
-    import {authMixins} from "../Mixins/authMixins";
     import axios from 'axios'
 
     export default {
@@ -161,9 +152,51 @@
                     phn_no:'',
                     image:''
                 },
+                imageName:'',
+                nameInputRules:[
+                    v => !!v || 'Name is required',
+                    v => (v &&v.length>=3) || 'Name must be 3 character'
+                ],
+                emailInputRules:[
+                    v => !!v || 'E-mail is required',
+                    v => /.+@.+/.test(v) || 'Must be valid E-mail'
+                ],
+                passwordInputRules:[
+                    v => !!v || 'Password is required',
+                    v => (v &&v.length>=6) || 'Password must be 6 character'
+                ],
+                confirmPassInputRules:[
+                    v => !!v || 'Password is required',
+                    v => (v &&v.length>=6) || 'Password must be 6 character'
+                ],
+                nidInputRules:[
+                    v => !!v || 'NID is required',
+                    v => (v && v.length)>=31 || 'Enter a valid NID'
+                ],
+                occupationInputRules:[
+                    v => !!v || 'Occupation is required',
+                ],
+                houseInputRules:[
+                    v => !!v || 'House number is required',
+                ],
+                roadInputRules:[
+                    v => !!v || 'Road number is required',
+                ],
+                thanaInputRules:[
+                    v => !!v || 'Thana is required',
+
+                ],
+                districtInputRules:[
+                    v => !!v || 'District is required',
+                ],
+                birthDateInputRules:[
+                    v => !!v || 'Birth date is required',
+                ],
+                phnNoInputRules:[
+                    v => !!v || 'Phone number is required',
+                ],
             }
         },
-        mixins:[authMixins],
 
         methods:{
             onImageChange(e) {
@@ -171,12 +204,14 @@
                 if (!files.length)
                     return;
                 this.createImage(files[0]);
+                console.log(e)
             },
             createImage(file) {
                 let reader = new FileReader();
                 let vm = this;
                 reader.onload = (e) => {
                     vm.form.image = e.target.result;
+                    vm.imageName = file.name;
                 };
                 reader.readAsDataURL(file);
             },
@@ -190,6 +225,9 @@
                         console.log(error);
                     })
                 }
+            },
+            resetForm() {
+                this.$refs.signUpForm.reset();
             },
             onFileSelected(event){
                 if (event.target.files[0].size>50000){
