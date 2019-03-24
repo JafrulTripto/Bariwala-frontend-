@@ -1,6 +1,6 @@
 <template>
     <div class="signUp">
-        <v-layout justify-center ma-5>
+        <v-layout justify-center class="ma-3">
             <v-flex md4 sm8 xs12>
                 <v-card>
                     <v-toolbar dark color="primary" flat>
@@ -13,35 +13,51 @@
                                 <v-form ref="signInForm">
                                     <v-container>
 
-                                        <v-flex md10 sm12 xs12>
+                                        <v-flex md12 sm12 xs12>
                                             <v-text-field label="Email"
                                                           v-model="form.email"
-                                                          prepend-icon="email"
+                                                          prepend-inner-icon="email"
+                                                          outline
                                             ></v-text-field>
                                         </v-flex>
-                                        <v-flex md10 sm12 xs12>
+                                        <v-flex md12 sm12 xs12>
                                             <v-text-field label="Password"
                                                           type="password"
-                                                          prepend-icon="security"
+                                                          prepend-inner-icon="security"
                                                           v-model="form.password"
+                                                          outline
                                             ></v-text-field>
                                         </v-flex>
-                                        <v-layout justify-end class="mx-5">
-                                            <v-flex md4 sm10 xs10>
-                                                <v-btn class="success mx-0 mt3" flat @click="login">Sign in</v-btn>
-                                            </v-flex>
+                                        <v-layout justify-end>
+                                                <v-btn class="success" flat @click="login">Sign in</v-btn>
                                         </v-layout>
                                     </v-container>
                                 </v-form>
+
                             </v-flex>
                         </v-layout>
-                    </v-card-text>
-                    <v-layout justify-center align-center class="ma-3">
-                        <v-flex xs-12 md12>
-                            <v-btn flat block class="info" to="/signUp">Join now</v-btn>
-                        </v-flex>
+                        <v-layout justify-center align-center class="px-3">
+                            <v-flex md12 sm10 xs12>
+                                <v-alert
+                                        :value="validateLogin"
+                                        color="error"
+                                        icon="error"
+                                        outline
+                                >
+                                    Invalid Email or Password.
+                                </v-alert>
+                            </v-flex>
 
-                    </v-layout>
+                        </v-layout>
+                        <v-layout justify-center align-center class="mx-3">
+                            <v-flex xs-12 sm10 md12>
+                                <v-btn flat block class="info" to="/signUp">Join now</v-btn>
+                            </v-flex>
+
+                        </v-layout>
+                    </v-card-text>
+
+
                 </v-card>
             </v-flex>
 
@@ -60,15 +76,30 @@
                 form:{
                     email:'',
                     password:''
-                }
+                },
+                alertValue:false,
             }
         },
         methods:{
             login(){
-                this.$store.dispatch('retrieveUserData', this.form)
+                let _this = this;
+
+                this.$store.dispatch('retrieveUserData', _this.form)
                     .then(response=>{
+                        console.log(response);
                         this.$router.push({path:'/dashboard'});
+                        _this.$toastr.success('Successfully logged in', 'Message',
+                            {positionClass: "toast-bottom-right"});
                     })
+                    .catch(error=>{
+                        console.log(error)
+                        _this.alertValue=true;
+                    })
+            }
+        },
+        computed:{
+            validateLogin(){
+                return this.alertValue;
             }
         }
 

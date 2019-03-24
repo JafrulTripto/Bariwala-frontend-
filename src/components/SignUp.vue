@@ -38,7 +38,7 @@
                                                 <v-text-field outline label="Confirm Password"
                                                               v-model="form.confirmPass"
                                                               type="password"
-                                                              :rules="passwordInputRules"
+                                                              :rules="confirmPassInputRules"
                                                 ></v-text-field>
                                             </v-flex>
                                             <v-flex md6 sm6 xs12>
@@ -167,11 +167,11 @@
                 ],
                 confirmPassInputRules:[
                     v => !!v || 'Password is required',
-                    v => (v &&v.length>=6) || 'Password must be 6 character'
+                    v => (v === this.form.password) || 'Password doesn\'t match'
                 ],
                 nidInputRules:[
                     v => !!v || 'NID is required',
-                    v => (v && v.length)>=31 || 'Enter a valid NID'
+                    v => (v && v.length)>=13 || 'Enter a valid NID'
                 ],
                 occupationInputRules:[
                     v => !!v || 'Occupation is required',
@@ -217,10 +217,11 @@
             },
             submit(){
                 console.log(this.form);
-                if (this.$refs.signUpForm.validate()){
-                    axios.post(this.$store.state.httpLink + 'signUp',this.form)
+                let _this= this;
+                if (_this.$refs.signUpForm.validate()){
+                    axios.post(_this.$store.state.httpLink + 'signUp',_this.form)
                         .then(function (response) {
-                            console.log(response);
+                            _this.$router.push({path:'/'});
                         }).catch(function (error) {
                         console.log(error);
                     })
