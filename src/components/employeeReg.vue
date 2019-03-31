@@ -1,13 +1,12 @@
 <template>
     <div class="signUp">
-        <v-layout justify-center class="pa-3">
+        <h1 class="subheading grey--text">Sign Up</h1>
+        <v-layout justify-center>
             <v-flex md8 sm12 xs12>
-                <v-card class="pa-2">
-                    <v-card class="ma-4 mx-5" color="light-blue lighten-2">
-                        <v-card-title class="mx-5 display-2 white--text">
-                            {{formHeader()}}
-                        </v-card-title>
-                    </v-card>
+                <v-card class="ma-3" flat>
+                    <v-card-title class="display-2 grey--text font-weight-thin">
+                        Sign up
+                    </v-card-title>
                     <v-card-text>
                         <v-layout justify-space-around row>
                             <v-flex md10 sm12 xs12>
@@ -125,8 +124,6 @@
                     </v-card-text>
                 </v-card>
             </v-flex>
-
-
         </v-layout>
     </div>
 </template>
@@ -146,7 +143,6 @@
                     NID_no: null,
                     password: '',
                     confirmPass: '',
-                    is_admin:true,
                     date_of_birth: null,
                     occupation: '',
                     house_no: '',
@@ -154,8 +150,7 @@
                     thana: '',
                     district: '',
                     phn_no:'',
-                    image:'',
-                    user_id:''
+                    image:''
                 },
                 imageName:'',
                 nameInputRules:[
@@ -204,12 +199,6 @@
         },
 
         methods:{
-            formHeader(){
-                if (this.$route.params.type==='employee'){
-                    return 'Employee Registration'
-                }
-                return 'User Registration'
-            },
             onImageChange(e) {
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
@@ -229,17 +218,7 @@
             submit(){
                 console.log(this.form);
                 let _this= this;
-
-                if (_this.$refs.signUpForm.validate() && this.$route.params.type==='employee'){
-                    _this.form.user_id=_this.$store.state.user_data.user_id;
-                    axios.post(_this.$store.state.httpLink + 'addEmployee',_this.form)
-                        .then(function (response) {
-                            _this.$router.push({path:'/'});
-                        }).catch(function (error) {
-                        console.log(error);
-                    })
-                }
-                else{
+                if (_this.$refs.signUpForm.validate()){
                     axios.post(_this.$store.state.httpLink + 'signUp',_this.form)
                         .then(function (response) {
                             _this.$router.push({path:'/'});
@@ -263,16 +242,13 @@
                     this.fileName = event.target.files[0].name;
                 }
             }
-         },
+        },
 
         computed: {
             formattedBirthDate() {
                 return this.form.date_of_birth ? moment(this.form.date_of_birth).format('LL') : '';
             },
         },
-        created() {
-            console.log(this.$store.state.user_data.user_id);
-        }
 
     }
 </script>

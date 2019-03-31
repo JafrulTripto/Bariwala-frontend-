@@ -1,20 +1,20 @@
 <template>
     <nav>
-        <v-toolbar flat app>
-            <v-toolbar-side-icon class="gray--text" @click="drawerFunctionality"></v-toolbar-side-icon>
-            <v-toolbar-title class="text-uppercase gray--text">
-                <span class="font-weight-light">Bari</span>
-                <span>wala</span>
+        <v-toolbar flat app class="light-blue darken-1">
+            <v-toolbar-side-icon class="white--text" @click="drawerFunctionality"></v-toolbar-side-icon>
+            <v-toolbar-title class="text-uppercase white--text">
+                <span>Point Of</span>
+                <span class="font-weight-light"> Sale</span>
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn  flat color="red">
-                <router-link v-if="loggedIn" to="/signOut">Sign Out</router-link>
+                <router-link v-if="loggedIn" to="/signOut" class="white--text">Sign Out</router-link>
                 <router-link v-else to="/">Sign In</router-link>
                 <v-icon right>exit_to_app</v-icon>
             </v-btn>
         </v-toolbar>
 
-        <v-navigation-drawer disable-resize-watcher v-model="drawer" app class="light-blue darken-3">
+        <v-navigation-drawer disable-resize-watcher v-model="drawer" app class="light-blue darken-1">
             <v-layout column align-center>
                 <v-flex class="mt-5">
                     <v-avatar size="100">
@@ -47,7 +47,8 @@
             return{
                 drawer:false,
                 links:[
-                    {icon:'dashboard', text:'Dashboard', route: '/Dashboard'},
+                    {icon:'dashboard', text:'Dashboard', route: '/dashboard'},
+                    {icon:'accessibility', text:'Employee', route: '/employee'},
                     {icon:'folder', text:'Sign In', route: '/'},
                 ]
             }
