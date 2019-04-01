@@ -47,13 +47,6 @@
                                     Invalid Email or Password.
                                 </v-alert>
                             </v-flex>
-
-                        </v-layout>
-                        <v-layout justify-center align-center class="mx-3">
-                            <v-flex xs-12 sm10 md12>
-                                <v-btn flat block class="info" to="signUp/admin">Join now</v-btn>
-                            </v-flex>
-
                         </v-layout>
                     </v-card-text>
 

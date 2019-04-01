@@ -56,12 +56,11 @@
         methods:{
 
             drawerFunctionality(){
-                if (this.loggedIn){
-
-                    this.drawer = !this.drawer;
+                if (!this.loggedIn){
+                    this.drawer = false;
                 }
                 else {
-                    this.drawer = false;
+                    this.drawer = !this.drawer;
                 }
             }
         },

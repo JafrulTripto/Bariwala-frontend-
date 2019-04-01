@@ -23,7 +23,11 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes:Routes,
   mode:'history'
-})
+});
+
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
 
 
 router.beforeEach((to, from, next) => {

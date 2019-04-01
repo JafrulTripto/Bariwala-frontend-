@@ -1,12 +1,13 @@
 <template>
     <div class="signUp">
-        <h1 class="subheading grey--text">Sign Up</h1>
-        <v-layout justify-center>
+        <v-layout justify-center class="pa-3">
             <v-flex md8 sm12 xs12>
-                <v-card class="ma-3" flat>
-                    <v-card-title class="display-2 grey--text font-weight-thin">
-                        Sign up
-                    </v-card-title>
+                <v-card class="pa-2">
+                    <v-card class="ma-4 mx-5" color="light-blue lighten-2">
+                        <v-card-title class="mx-5 display-2 white--text">
+                            Add New Employee
+                        </v-card-title>
+                    </v-card>
                     <v-card-text>
                         <v-layout justify-space-around row>
                             <v-flex md10 sm12 xs12>
@@ -58,8 +59,8 @@
                                         </v-layout>
                                         <v-layout row wrap>
                                             <v-flex md4 sm6 xs12>
-                                                <v-text-field outline label="Occupation"
-                                                              v-model="form.occupation"
+                                                <v-text-field outline label="Designation"
+                                                              v-model="form.designation"
                                                               :rules="occupationInputRules"
                                                 ></v-text-field>
                                             </v-flex>
@@ -124,6 +125,8 @@
                     </v-card-text>
                 </v-card>
             </v-flex>
+
+
         </v-layout>
     </div>
 </template>
@@ -143,14 +146,15 @@
                     NID_no: null,
                     password: '',
                     confirmPass: '',
+                    is_admin:false,
                     date_of_birth: null,
-                    occupation: '',
+                    designation: '',
                     house_no: '',
                     road_no: '',
                     thana: '',
                     district: '',
                     phn_no:'',
-                    image:''
+                    image:'',
                 },
                 imageName:'',
                 nameInputRules:[
@@ -218,8 +222,9 @@
             submit(){
                 console.log(this.form);
                 let _this= this;
+
                 if (_this.$refs.signUpForm.validate()){
-                    axios.post(_this.$store.state.httpLink + 'signUp',_this.form)
+                    axios.post(_this.$store.state.httpLink + 'addEmployee',_this.form)
                         .then(function (response) {
                             _this.$router.push({path:'/'});
                         }).catch(function (error) {
@@ -242,13 +247,16 @@
                     this.fileName = event.target.files[0].name;
                 }
             }
-        },
+         },
 
         computed: {
             formattedBirthDate() {
                 return this.form.date_of_birth ? moment(this.form.date_of_birth).format('LL') : '';
             },
         },
+        created() {
+            console.log(this.$store.state.user_data.user_id);
+        }
 
     }
 </script>

@@ -1,17 +1,17 @@
 
-import Signup from "./components/SignUp";
+import addEmployee from "./components/addEmployee";
 import Dashboard from "./components/Dashboard"
 import SignIn from "./components/SignIn"
 import SignOut from "./components/signOut"
 import dashboard from './components/companyDashboard'
 import Employee from "./components/Employee";
-import EmployeeReg from './components/employeeReg'
+
 
 export default [
     {
-        path:'/signUp/:type',
-        component:Signup,
-        name:'signUp',
+        path:'/addEmployee',
+        component:addEmployee,
+        name:'addEmployee',
 
     },
    /* {
