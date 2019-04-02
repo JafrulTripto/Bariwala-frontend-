@@ -4,7 +4,7 @@
             <v-flex md8 sm12 xs12>
                 <v-card class="pa-2">
                     <v-card class="ma-4 mx-5" color="light-blue lighten-2">
-                        <v-card-title class="mx-5 display-2 white--text">
+                        <v-card-title :class="{'title mx-5 white--text': $vuetify.breakpoint.xs} " class="display-1 mx-5 white--text">
                             Add New Employee
                         </v-card-title>
                     </v-card>

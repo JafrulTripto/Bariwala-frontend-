@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         form: {},
-        httpLink: 'http://bariwala.test/api/',
+        httpLink: 'http://pos.test/api/',
         error:'',
         user_data:JSON.parse(localStorage.getItem('user_data'))||null
     },
