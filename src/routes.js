@@ -1,6 +1,5 @@
 
-import addEmployee from "./components/addEmployee";
-import Dashboard from "./components/Dashboard"
+
 import SignIn from "./components/SignIn"
 import SignOut from "./components/signOut"
 import dashboard from './components/companyDashboard'
@@ -8,12 +7,6 @@ import Employee from "./components/Employee";
 
 
 export default [
-    {
-        path:'/addEmployee',
-        component:addEmployee,
-        name:'addEmployee',
-
-    },
    /* {
         path:'/dashboard',
         component:dashboard,
@@ -56,6 +49,7 @@ export default [
     {
         path:'/signOut',
         component:SignOut,
+        name:'signOut'
     },
 ]
 

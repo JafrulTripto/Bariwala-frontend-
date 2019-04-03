@@ -1,61 +1,32 @@
 <template>
-    <div class="signUp">
-        <v-layout justify-center class="ma-3">
-            <v-flex md4 sm8 xs12>
-                <v-card>
-                    <v-toolbar dark color="primary" flat>
-                        <v-toolbar-title class="white--text">Sign In</v-toolbar-title>
-                    </v-toolbar>
-                    <v-card-text>
-
-                        <v-layout justify-center align-center>
-                            <v-flex md12 sm10 xs12>
-                                <v-form ref="signInForm">
-                                    <v-container>
-
-                                        <v-flex md12 sm12 xs12>
-                                            <v-text-field label="Email"
-                                                          v-model="form.email"
-                                                          prepend-inner-icon="email"
-                                                          outline
-                                            ></v-text-field>
-                                        </v-flex>
-                                        <v-flex md12 sm12 xs12>
-                                            <v-text-field label="Password"
-                                                          type="password"
-                                                          prepend-inner-icon="security"
-                                                          v-model="form.password"
-                                                          outline
-                                            ></v-text-field>
-                                        </v-flex>
-                                        <v-layout justify-end>
-                                                <v-btn class="success" flat @click="login">Sign in</v-btn>
-                                        </v-layout>
-                                    </v-container>
-                                </v-form>
-
-                            </v-flex>
-                        </v-layout>
-                        <v-layout justify-center align-center class="px-3">
-                            <v-flex md12 sm10 xs12>
-                                <v-alert
-                                        :value="validateLogin"
-                                        color="error"
-                                        icon="error"
-                                        outline
-                                >
-                                    Invalid Email or Password.
-                                </v-alert>
-                            </v-flex>
-                        </v-layout>
-                    </v-card-text>
-
-
-                </v-card>
-            </v-flex>
-
-        </v-layout>
-
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="col-md-5 col-md-offset-4">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">Please sign in</h3>
+                    </div>
+                    <div class="card-body">
+                        <form accept-charset="UTF-8" role="form" @submit.prevent>
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="E-mail" name="email" type="text" v-model="form.email">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" v-model="form.password">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me"> Remember Me
+                                    </label>
+                                </div>
+                                <button class="btn btn-block btn-success" @click="login()">LOG IN</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -76,6 +47,7 @@
         methods:{
             login(){
                 let _this = this;
+                console.log('clicked')
 
                 this.$store.dispatch('retrieveUserData', _this.form)
                     .then(response=>{

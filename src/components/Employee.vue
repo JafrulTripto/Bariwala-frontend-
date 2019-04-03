@@ -1,137 +1,104 @@
 <template>
-    <div>
-        <v-container>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header text-white" style="background-color: #677b95">
+                <h3 class="h3">Employee</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-10 col-md-4 col-lg-4">
+                        <input type="email" class="form-control" v-model="searchEmployee" placeholder="Search">
+                    </div>
+                    <div class="clearfix col-lg-8">
+                        <button class="float-right btn btn-success" data-toggle="modal" data-target="#addEmpModal">Add employee</button>
+                    </div>
+                    <NewEmployee id="addEmpModal"></NewEmployee>
 
-            <v-layout row wrap>
-                <v-flex xs12 sm12 md12>
-                    <v-card>
-                        <v-card-title class="blue darken-1 white--text headline">
-                            Employee
-                        </v-card-title>
-                        <v-layout row wrap class="pt-4 px-3">
-                            <v-flex xs8 sm6 md3>
-                                <v-text-field
-                                        id="search"
-                                        v-model="searchEmployee"
-                                        label="Search Employee"
-                                ></v-text-field>
-                            </v-flex>
-                            <v-layout justify-end class="pt-2">
-                                <v-btn class="success" @click="addEmployee" round>
-                                    Add Employee
-                                    <v-icon right dark>person_add</v-icon>
-                                </v-btn>
-                            </v-layout>
-                        </v-layout>
-                        <v-spacer></v-spacer>
-                    </v-card>
-                </v-flex>
-            </v-layout>
-            <v-layout row>
-                <v-flex xs12 sm12 md12>
-                    <v-card class="my-3">
-                        <v-card-title class="blue darken-1 white--text headline">
-                            Employee List
-                        </v-card-title>
-                        <v-card-text>
-                            <v-data-table
-                                    :headers="headers"
-                                    :items="tasks"
-                                    class="elevation-1"
-                                    item-key="id"
-                                    dark
-                            >
-                                <template v-slot:items="props">
-                                    <td>{{ props.item.id }}</td>
-                                    <td>
-                                        <v-avatar size="42">
-                                            <img :src="avatar_link+props.item.user_details.image">
-                                        </v-avatar>
-                                    </td>
-                                    <td class="text-xs-center">{{ props.item.name }}</td>
-                                    <td class="text-xs-center">{{ props.item.email }}</td>
-                                    <td class="text-xs-center">{{ props.item.user_details.designation }}</td>
-                                    <td class="text-xs-center">{{ props.item.user_details.phn_no }}</td>
-                                    <td class="text-xs-center">
+                </div>
+            </div>
+        </div>
 
-                                        <v-tooltip bottom color="cyan darken-4">
-                                            <template v-slot:activator="{ on }">
-                                                <v-btn fab dark small color="cyan lighten-1" v-on="on">
-                                                    <v-icon dark>edit</v-icon>
-                                                </v-btn>
-                                            </template>
-                                            <span>Edit</span>
-                                        </v-tooltip>
-                                        <v-tooltip bottom color="red darken-4">
-                                            <template v-slot:activator="{ on }">
-                                                <v-btn fab dark small color="red darken-1" v-on="on" @click="deleteEmp(props.item.id, props.index)">
-                                                    <v-icon dark>delete</v-icon>
-                                                </v-btn>
-                                            </template>
-                                            <span>Delete</span>
-                                        </v-tooltip>
-                                    </td>
+        <div class="card mt-3">
+            <div class="card-header text-white"  style="background-color: #677b95">
+                <h3 class="h3">Employee List</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Designation</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="employee in employees" :key=employee.id>
+                            <th scope="row">{{employee.id}}</th>
+                            <td>{{employee.name}}</td>
+                            <td>{{employee.email}}</td>
+                            <td>{{employee.user_details.phn_no}}</td>
+                            <td>{{employee.user_details.designation}}</td>
 
-                                </template>
-                            </v-data-table>
-                        </v-card-text>
-                        <v-card-text>
-
-                        </v-card-text>
-                    </v-card>
-                </v-flex>
-
-            </v-layout>
-
-        </v-container>
-
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-danger">
+                                        <i class="material-icons">done</i>
+                                    </button>
+                                    <button type="button" class="btn btn-warning">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
 </template>
 <script>
 
     import axios from 'axios';
+    import NewEmployee from "./NewEmployee";
+
+
+
     export default {
         name: "Employee",
-        data(){
-            return{
+        components:{
+           NewEmployee:NewEmployee,
+        },
+
+        data() {
+            return {
                 searchEmployee:'',
-                employees:[],
-                avatar_link:'http://localhost/Laravel/Bariwala/storage/app/public/',
-                headers: [
-                    {
-                        text: 'Id',
-                        align: 'left',
-                        sortable: true,
-                        value: 'id'
-                    },
-                    { text: '', value: 'image',align: 'center', },
-                    { text: 'Name', value: 'name',align: 'center', },
-                    { text: 'Email', value: 'email',align: 'center', },
-                    { text: 'Designation', value: 'designation',align: 'center', },
-                    { text: 'Phone Number', value: 'phn_no',align: 'center', },
-                    { text: 'Action',align: 'center',value:''},
-                ],
+                employees: [],
+                avatar_link: 'http://localhost/Laravel/Bariwala/storage/app/public/',
             }
         },
-        methods:{
-            addEmployee(){
+        methods: {
+            addEmployee() {
                 this.$router.push('addEmployee')
 
             },
-            showEmployee(){
+            showEmployee() {
                 let _this = this;
                 axios.get(_this.$store.state.httpLink + 'showEmployee')
                     .then(function (response) {
-                        _this.employees=response.data;
+                        _this.employees = response.data;
                     }).catch(function (error) {
                     console.log(error);
                 })
             },
-            deleteEmp(itemKey,index){
+            deleteEmp(itemKey, index) {
                 let _this = this;
-                console.log(itemKey,index)
-                axios.post(_this.$store.state.httpLink + 'deleteEmployee?id='+itemKey)
+                console.log(itemKey, index)
+                axios.post(_this.$store.state.httpLink + 'deleteEmployee?id=' + itemKey)
                     .then(function (response) {
                         _this.employees.splice(index);
                         _this.$toastr.warning('Deleted', 'Message',
@@ -142,14 +109,14 @@
             }
 
         },
-        computed:{
+        computed: {
             tasks() {
                 let _this = this;
                 //console.log(_this.$store.getters.databaseRead);
                 return _this.employees.filter(task => {
                     if (_this.searchEmployee) {
                         return task.name.toLowerCase().includes(_this.searchEmployee.toLowerCase())
-                    }else
+                    } else
                         return true;
                 });
             },
@@ -163,7 +130,4 @@
 
 <style scoped>
 
-    thead{
-        background-color: #0090c1;
-    }
 </style>

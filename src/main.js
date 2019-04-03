@@ -1,11 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-
-Vue.use(Vuetify)
-
 
 
 import VueToastr2 from 'vue-toastr-2'
@@ -20,14 +15,14 @@ import VueRouter from 'vue-router'
 import Routes from './routes'
 Vue.use(VueRouter)
 
+//Vue material
+//
+
 const router = new VueRouter({
   routes:Routes,
   mode:'history'
 });
 
-import BootstrapVue from 'bootstrap-vue'
-
-Vue.use(BootstrapVue)
 
 
 router.beforeEach((to, from, next) => {

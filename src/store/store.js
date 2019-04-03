@@ -19,7 +19,6 @@ export const store = new Vuex.Store({
         isLoggedIn(state){
             if (!state.user_data || !state.user_data.token)
                 return false;
-
             return true;
         }
     },
