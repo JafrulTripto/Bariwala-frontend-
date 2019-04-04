@@ -12,7 +12,7 @@
                     <div class="clearfix col-lg-8">
                         <button class="float-right btn btn-success" data-toggle="modal" data-target="#addEmpModal">Add employee</button>
                     </div>
-                    <NewEmployee id="addEmpModal"></NewEmployee>
+                    <NewEmployee id="addEmpModal" v-on:change="showEmployee"></NewEmployee>
 
                 </div>
             </div>
@@ -36,20 +36,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="employee in employees" :key=employee.id>
+                        <tr v-for="(employee,index) in employees">
                             <th scope="row">{{employee.id}}</th>
-                            <td>{{employee.name}}</td>
+                            <td><img :src="avatar_link+employee.user_details.image" alt="Avatar" class="avatar"> {{employee.name}}</td>
                             <td>{{employee.email}}</td>
                             <td>{{employee.user_details.phn_no}}</td>
                             <td>{{employee.user_details.designation}}</td>
 
                             <td>
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-danger">
-                                        <i class="material-icons">done</i>
+                                    <button type="button" class="btn btn-danger" @click="deleteEmp(employee.id,index)">
+                                        <i class="material-icons">close</i>
                                     </button>
                                     <button type="button" class="btn btn-warning">
-                                        <i class="material-icons">close</i>
+                                        <i class="material-icons">edit</i>
                                     </button>
                                 </div>
                             </td>
@@ -78,7 +78,7 @@
             return {
                 searchEmployee:'',
                 employees: [],
-                avatar_link: 'http://localhost/Laravel/Bariwala/storage/app/public/',
+                avatar_link:'http://localhost/Laravel/Bariwala/storage/app/public/',
             }
         },
         methods: {
@@ -95,12 +95,12 @@
                     console.log(error);
                 })
             },
-            deleteEmp(itemKey, index) {
+            deleteEmp(id, key) {
                 let _this = this;
-                console.log(itemKey, index)
-                axios.post(_this.$store.state.httpLink + 'deleteEmployee?id=' + itemKey)
+                console.log(id, key)
+                axios.post(_this.$store.state.httpLink + 'deleteEmployee?id=' + id)
                     .then(function (response) {
-                        _this.employees.splice(index);
+                        _this.employees.splice(key);
                         _this.$toastr.warning('Deleted', 'Message',
                             {positionClass: "toast-bottom-right"});
                     }).catch(function (error) {
@@ -120,6 +120,7 @@
                         return true;
                 });
             },
+
         },
         created() {
             this.showEmployee();
@@ -129,5 +130,10 @@
 </script>
 
 <style scoped>
-
+    .avatar {
+        vertical-align: middle;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
 </style>

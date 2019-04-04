@@ -10,10 +10,12 @@
                         <form accept-charset="UTF-8" role="form" @submit.prevent>
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="text" v-model="form.email">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" id="email" placeholder="E-mail" name="email" type="text" v-model="form.email">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" v-model="form.password">
+                                    <label for="email">Password</label>
+                                    <input class="form-control" id="password" placeholder="Password" name="password" type="password" v-model="form.password">
                                 </div>
                                 <div class="checkbox">
                                     <label>

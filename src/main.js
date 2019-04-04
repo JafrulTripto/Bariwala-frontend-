@@ -15,7 +15,13 @@ import VueRouter from 'vue-router'
 import Routes from './routes'
 Vue.use(VueRouter)
 
-//Vue material
+//Vue Datetime
+import Datetime from 'vue-datetime'
+// You need a specific loader for CSS files
+import 'vue-datetime/dist/vue-datetime.css'
+
+Vue.use(Datetime)
+
 //
 
 const router = new VueRouter({

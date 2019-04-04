@@ -1,37 +1,69 @@
 <template>
     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add Employee</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="row d-flex justify-content-center">
-                    <div class="modal-body col-md-8 ">
-                        <form>
-                            <div class="form-group">
+                <div class="row d-flex justify-content-center p-2">
+                    <div class=" modal-body col-md-12 ">
+                        <form class="row d-flex justify-content-center">
+                            <div class="form-group col-md-5">
+                                <label for="exampleInputEmail1">Name</label>
+                                <input type="text" v-model="form.name" class="form-control" id="nameInput" placeholder="Enter Name">
+                            </div>
+                            <div class="form-group col-md-5">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <input type="email" v-model="form.email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <div class="form-group col-md-5">
+                                <label for="password">Password</label>
+                                <input type="password" v-model="form.password" class="form-control" id="password" placeholder="Password">
                             </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            <div class="form-group col-md-5">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" v-model="form.confirmPass" class="form-control" id="confirmPassword" placeholder="Password">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="form-group col-md-5">
+                                <label for="designation">Designation</label>
+                                <input type="text" v-model="form.designation" class="form-control" id="designation" placeholder="Designation">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label>Birth Date</label>
+                                <datetime input-class="form-control"
+                                          v-model="form.date_of_birth"
+                                          title="Birth Date"
+                                          max-datetime="20000101T000000+0600">
+
+                                </datetime>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="NidNumber">NID Number</label>
+                                <input type="text" v-model="form.NID_no" class="form-control" id="NidNumber" placeholder="NID Number">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="Phone">Phone Number</label>
+                                <input type="text" v-model="form.phn_no" class="form-control" id="Phone" placeholder="Phone Number">
+                            </div>
+                            <div class="form-group col-md-10">
+                                <label for="address">Address</label>
+                                <textarea v-model="form.address" class="form-control" placeholder="Address" id="address"></textarea>
+                            </div>
+                            <div class="form-group custom-file col-md-6">
+                                <input type="file" class="custom-file-input" v-on:change="onImageChange" id="customFile">
+                                <label class="custom-file-label form-control" for="customFile">Choose Image</label>
+                            </div>
+
                         </form>
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="submit">Save changes</button>
                 </div>
             </div>
         </div>
@@ -55,56 +87,12 @@
                     is_admin:false,
                     date_of_birth: null,
                     designation: '',
-                    house_no: '',
-                    road_no: '',
-                    thana: '',
-                    district: '',
+                    address:'',
                     phn_no:'',
                     image:'',
                 },
                 imageName:'',
-                nameInputRules:[
-                    v => !!v || 'Name is required',
-                    v => (v &&v.length>=3) || 'Name must be 3 character'
-                ],
-                emailInputRules:[
-                    v => !!v || 'E-mail is required',
-                    v => /.+@.+/.test(v) || 'Must be valid E-mail'
-                ],
-                passwordInputRules:[
-                    v => !!v || 'Password is required',
-                    v => (v &&v.length>=6) || 'Password must be 6 character'
-                ],
-                confirmPassInputRules:[
-                    v => !!v || 'Password is required',
-                    v => (v === this.form.password) || 'Password doesn\'t match'
-                ],
-                nidInputRules:[
-                    v => !!v || 'NID is required',
-                    v => (v && v.length)>=13 || 'Enter a valid NID'
-                ],
-                occupationInputRules:[
-                    v => !!v || 'Occupation is required',
-                ],
-                houseInputRules:[
-                    v => !!v || 'House number is required',
-                ],
-                roadInputRules:[
-                    v => !!v || 'Road number is required',
-                ],
-                thanaInputRules:[
-                    v => !!v || 'Thana is required',
 
-                ],
-                districtInputRules:[
-                    v => !!v || 'District is required',
-                ],
-                birthDateInputRules:[
-                    v => !!v || 'Birth date is required',
-                ],
-                phnNoInputRules:[
-                    v => !!v || 'Phone number is required',
-                ],
             }
         },
 
@@ -126,17 +114,17 @@
                 reader.readAsDataURL(file);
             },
             submit(){
-                console.log(this.form);
-                let _this= this;
 
-                if (_this.$refs.signUpForm.validate()){
+                let _this= this;
+                    _this.form.date_of_birth=_this.formattedBirthDate;
+                console.log(this.form);
                     axios.post(_this.$store.state.httpLink + 'addEmployee',_this.form)
                         .then(function (response) {
-                            _this.$router.push({path:'/'});
+                            _this.$toastr.warning('New Employee Added', 'Message',
+                                {positionClass: "toast-bottom-right"});
                         }).catch(function (error) {
                         console.log(error);
                     })
-                }
             },
             resetForm() {
                 this.$refs.signUpForm.reset();
@@ -157,7 +145,7 @@
 
         computed: {
             formattedBirthDate() {
-                return this.form.date_of_birth ? moment(this.form.date_of_birth).format('LL') : '';
+                return this.form.date_of_birth ? moment(this.form.date_of_birth).format('YYYY-MM-DD') : '';
             },
         },
         created() {
@@ -168,5 +156,6 @@
 </script>
 
 <style scoped>
+
 
 </style>
