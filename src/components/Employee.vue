@@ -12,7 +12,7 @@
                     <div class="clearfix col-lg-8">
                         <button class="float-right btn btn-success" data-toggle="modal" data-target="#addEmpModal">Add employee</button>
                     </div>
-                    <NewEmployee id="addEmpModal" v-on:change="showEmployee"></NewEmployee>
+                    <NewEmployee id="addEmpModal"></NewEmployee>
 
                 </div>
             </div>
@@ -36,7 +36,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(employee,index) in employees">
+                        <tr v-for="(employee,index) in tasks">
                             <th scope="row">{{employee.id}}</th>
                             <td><img :src="avatar_link+employee.user_details.image" alt="Avatar" class="avatar"> {{employee.name}}</td>
                             <td>{{employee.email}}</td>
@@ -48,7 +48,7 @@
                                     <button type="button" class="btn btn-danger" @click="deleteEmp(employee.id,index)">
                                         <i class="material-icons">close</i>
                                     </button>
-                                    <button type="button" class="btn btn-warning">
+                                    <button type="button" class="btn btn-primary">
                                         <i class="material-icons">edit</i>
                                     </button>
                                 </div>
@@ -66,8 +66,6 @@
     import axios from 'axios';
     import NewEmployee from "./NewEmployee";
 
-
-
     export default {
         name: "Employee",
         components:{
@@ -77,8 +75,7 @@
         data() {
             return {
                 searchEmployee:'',
-                employees: [],
-                avatar_link:'http://localhost/Laravel/Bariwala/storage/app/public/',
+                avatar_link:'http://localhost/bariwala/storage/app/public/',
             }
         },
         methods: {
@@ -86,7 +83,7 @@
                 this.$router.push('addEmployee')
 
             },
-            showEmployee() {
+            /*showEmployee() {
                 let _this = this;
                 axios.get(_this.$store.state.httpLink + 'showEmployee')
                     .then(function (response) {
@@ -94,7 +91,7 @@
                     }).catch(function (error) {
                     console.log(error);
                 })
-            },
+            },*/
             deleteEmp(id, key) {
                 let _this = this;
                 console.log(id, key)
@@ -113,7 +110,7 @@
             tasks() {
                 let _this = this;
                 //console.log(_this.$store.getters.databaseRead);
-                return _this.employees.filter(task => {
+                return _this.$store.state.employees.filter(task => {
                     if (_this.searchEmployee) {
                         return task.name.toLowerCase().includes(_this.searchEmployee.toLowerCase())
                     } else
@@ -123,7 +120,7 @@
 
         },
         created() {
-            this.showEmployee();
+            this.$store.dispatch('showEmployee');
 
         }
     }

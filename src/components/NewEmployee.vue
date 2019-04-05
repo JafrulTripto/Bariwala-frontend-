@@ -120,6 +120,7 @@
                 console.log(this.form);
                     axios.post(_this.$store.state.httpLink + 'addEmployee',_this.form)
                         .then(function (response) {
+                            _this.$store.dispatch('showEmployee');
                             _this.$toastr.warning('New Employee Added', 'Message',
                                 {positionClass: "toast-bottom-right"});
                         }).catch(function (error) {
