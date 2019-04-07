@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="card">
-            <div class="card-header text-white" style="background-color: #677b95">
+            <div class="card-header text-white" style="background-color: #2c0635">
                 <h3 class="h3">Employee</h3>
             </div>
             <div class="card-body">
@@ -12,14 +12,14 @@
                     <div class="clearfix col-lg-8">
                         <button class="float-right btn btn-success" data-toggle="modal" data-target="#addEmpModal">Add employee</button>
                     </div>
-                    <NewEmployee id="addEmpModal" v-on:change="showEmployee"></NewEmployee>
+                    <NewEmployee id="addEmpModal"></NewEmployee>
 
                 </div>
             </div>
         </div>
 
         <div class="card mt-3">
-            <div class="card-header text-white"  style="background-color: #677b95">
+            <div class="card-header text-white"  style="background-color: #2c0635">
                 <h3 class="h3">Employee List</h3>
             </div>
             <div class="card-body">
@@ -36,7 +36,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(employee,index) in employees">
+                        <tr v-for="(employee,index) in tasks">
                             <th scope="row">{{employee.id}}</th>
                             <td><img :src="avatar_link+employee.user_details.image" alt="Avatar" class="avatar"> {{employee.name}}</td>
                             <td>{{employee.email}}</td>
@@ -77,7 +77,6 @@
         data() {
             return {
                 searchEmployee:'',
-                employees: [],
                 avatar_link:'http://localhost/Laravel/Bariwala/storage/app/public/',
             }
         },
@@ -86,7 +85,7 @@
                 this.$router.push('addEmployee')
 
             },
-            showEmployee() {
+           /* showEmployee() {
                 let _this = this;
                 axios.get(_this.$store.state.httpLink + 'showEmployee')
                     .then(function (response) {
@@ -94,15 +93,14 @@
                     }).catch(function (error) {
                     console.log(error);
                 })
-            },
+            },*/
             deleteEmp(id, key) {
                 let _this = this;
                 console.log(id, key)
                 axios.post(_this.$store.state.httpLink + 'deleteEmployee?id=' + id)
                     .then(function (response) {
-                        _this.employees.splice(key);
-                        _this.$toastr.warning('Deleted', 'Message',
-                            {positionClass: "toast-bottom-right"});
+                        _this.$store.state.employees.splice(key,1);
+                        console.log(_this.$store.state.employees)
                     }).catch(function (error) {
                     console.log(error);
                 })
@@ -113,7 +111,7 @@
             tasks() {
                 let _this = this;
                 //console.log(_this.$store.getters.databaseRead);
-                return _this.employees.filter(task => {
+                return _this.$store.state.employees.filter(task => {
                     if (_this.searchEmployee) {
                         return task.name.toLowerCase().includes(_this.searchEmployee.toLowerCase())
                     } else
@@ -123,8 +121,7 @@
 
         },
         created() {
-            this.showEmployee();
-
+                 this.$store.dispatch('showEmployee');
         }
     }
 </script>

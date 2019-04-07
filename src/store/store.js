@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         form: {},
+        employees:[],
         httpLink: 'http://pos.test/api/',
         error:'',
         user_data:JSON.parse(localStorage.getItem('user_data'))||null
@@ -30,6 +31,12 @@ export const store = new Vuex.Store({
         destroyToken(state){
             state.user_data.token = null;
             state.error = '';
+        },
+        showEmployee(state, employees){
+            state.employees = employees;
+        },
+        addEmployee(){
+
         }
     },
     actions:{
@@ -54,6 +61,20 @@ export const store = new Vuex.Store({
             } )
 
         },
+        showEmployee(context){
+            let _this = this;
+            return new Promise((resolve, reject) =>{
+                axios.get(_this.state.httpLink + 'showEmployee')
+                    .then(function (response) {
+                        context.commit('showEmployee',response.data);
+                        resolve(response);
+                    }).catch(function (error) {
+                    console.log(error);
+                    reject(error);
+                })
+            } )
+
+        },
         destroyToken(context){
             return new Promise((resolve, reject) =>{
                 axios.post(this.state.httpLink+'auth/logout?token='+this.state.user_data.token)
@@ -68,6 +89,20 @@ export const store = new Vuex.Store({
                         reject(error);
                     })
             })
+        },
+        addEmployee(context,credentials){
+            return new Promise((resolve, reject) =>{
+                let _this= this;
+                axios.post(_this.state.httpLink + 'addEmployee',credentials)
+                    .then(function (response) {
+                       context.commit('addEmployee');
+                       resolve(response);
+                    }).catch(function (error) {
+                    console.log(error);
+                    reject(error);
+                })
+            } )
+
         }
     }
 });

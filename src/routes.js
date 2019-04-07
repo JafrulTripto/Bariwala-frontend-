@@ -4,6 +4,7 @@ import SignIn from "./components/SignIn"
 import SignOut from "./components/signOut"
 import dashboard from './components/companyDashboard'
 import Employee from "./components/Employee";
+import Settings from "./components/MasterSetup"
 
 
 export default [
@@ -30,10 +31,19 @@ export default [
         meta:{
             requiresAuth:true
         }
-    }, {
+    },
+    {
         path:'/employee',
         component:Employee,
         name:'employee',
+        meta:{
+            requiresAuth:true
+        }
+    },
+    {
+        path:'/masterSetup',
+        component:Settings,
+        name:'settings',
         meta:{
             requiresAuth:true
         }

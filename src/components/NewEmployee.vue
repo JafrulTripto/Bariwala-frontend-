@@ -2,10 +2,10 @@
     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-white" style="background-color: #2c0635" >
                     <h5 class="modal-title" id="exampleModalLongTitle">Add Employee</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span class="text-white" aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="row d-flex justify-content-center p-2">
@@ -62,8 +62,19 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="submit">Save changes</button>
+                    <button type="button"
+                            class="btn btn-danger"
+                            data-dismiss="modal">
+                        <i class="material-icons" style="vertical-align: text-bottom">
+                            close
+                        </i> CLOSE</button>
+                    <button type="button"
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            @click="submit">
+                        <i class="material-icons" style="vertical-align: text-bottom">
+                            save_alt
+                        </i> SAVE</button>
                 </div>
             </div>
         </div>
@@ -85,7 +96,7 @@
                     password: '',
                     confirmPass: '',
                     is_admin:false,
-                    date_of_birth: null,
+                    date_of_birth: '',
                     designation: '',
                     address:'',
                     phn_no:'',
@@ -114,9 +125,13 @@
                 reader.readAsDataURL(file);
             },
             submit(){
-
-                let _this= this;
-                    _this.form.date_of_birth=_this.formattedBirthDate;
+                this.form.date_of_birth = this.formattedBirthDate;
+                this.$store.dispatch('addEmployee',this.form).then(response=>{
+                    this.$toastr.success('New Employee Added', 'Message',
+                        {positionClass: "toast-bottom-right"});
+                    this.$store.dispatch('showEmployee');
+                })
+               /* let _this= this;
                 console.log(this.form);
                     axios.post(_this.$store.state.httpLink + 'addEmployee',_this.form)
                         .then(function (response) {
@@ -124,7 +139,7 @@
                                 {positionClass: "toast-bottom-right"});
                         }).catch(function (error) {
                         console.log(error);
-                    })
+                    })*/
             },
             resetForm() {
                 this.$refs.signUpForm.reset();
@@ -157,5 +172,7 @@
 
 <style scoped>
 
-
+i{
+    font-size: 20px;
+}
 </style>
