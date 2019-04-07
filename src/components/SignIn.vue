@@ -3,8 +3,8 @@
         <div class="row justify-content-around">
             <div class="col-md-5 col-md-offset-4">
                 <div class="card card-default">
-                    <div class="card-header">
-                        <h3 class="card-title">Please sign in</h3>
+                    <div class="card-header text-white" style="background-color: #4e0c56">
+                        <h3 class="card-title">Sign in</h3>
                     </div>
                     <div class="card-body">
                         <form accept-charset="UTF-8" role="form" @submit.prevent>
