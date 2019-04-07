@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="card">
-            <div class="card-header text-white" style="background-color: #677b95">
+            <div class="card-header text-white" style="background-color: #2c0635">
                 <h3 class="h3">Employee</h3>
             </div>
             <div class="card-body">
@@ -19,7 +19,7 @@
         </div>
 
         <div class="card mt-3">
-            <div class="card-header text-white"  style="background-color: #677b95">
+            <div class="card-header text-white"  style="background-color: #2c0635">
                 <h3 class="h3">Employee List</h3>
             </div>
             <div class="card-body">
@@ -48,7 +48,7 @@
                                     <button type="button" class="btn btn-danger" @click="deleteEmp(employee.id,index)">
                                         <i class="material-icons">close</i>
                                     </button>
-                                    <button type="button" class="btn btn-primary">
+                                    <button type="button" class="btn btn-warning">
                                         <i class="material-icons">edit</i>
                                     </button>
                                 </div>
@@ -66,6 +66,8 @@
     import axios from 'axios';
     import NewEmployee from "./NewEmployee";
 
+
+
     export default {
         name: "Employee",
         components:{
@@ -75,7 +77,7 @@
         data() {
             return {
                 searchEmployee:'',
-                avatar_link:'http://localhost/bariwala/storage/app/public/',
+                avatar_link:'http://localhost/Laravel/Bariwala/storage/app/public/',
             }
         },
         methods: {
@@ -83,7 +85,7 @@
                 this.$router.push('addEmployee')
 
             },
-            /*showEmployee() {
+           /* showEmployee() {
                 let _this = this;
                 axios.get(_this.$store.state.httpLink + 'showEmployee')
                     .then(function (response) {
@@ -97,9 +99,8 @@
                 console.log(id, key)
                 axios.post(_this.$store.state.httpLink + 'deleteEmployee?id=' + id)
                     .then(function (response) {
-                        _this.employees.splice(key);
-                        _this.$toastr.warning('Deleted', 'Message',
-                            {positionClass: "toast-bottom-right"});
+                        _this.$store.state.employees.splice(key,1);
+                        console.log(_this.$store.state.employees)
                     }).catch(function (error) {
                     console.log(error);
                 })
@@ -120,8 +121,7 @@
 
         },
         created() {
-            this.$store.dispatch('showEmployee');
-
+                 this.$store.dispatch('showEmployee');
         }
     }
 </script>
