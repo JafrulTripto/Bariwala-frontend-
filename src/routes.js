@@ -4,7 +4,9 @@ import SignIn from "./components/SignIn"
 import SignOut from "./components/signOut"
 import dashboard from './components/companyDashboard'
 import Employee from "./components/Employee";
-import Settings from "./components/MasterSetup"
+import Settings from "./components/Master-Setup/MasterSetup"
+import SystemSetup from './components/Master-Setup/SystemSetup'
+import RoleSetup from './components/Master-Setup/RoleSetup'
 
 
 export default [
@@ -33,6 +35,14 @@ export default [
         }
     },
     {
+        path:'/systemSetup',
+        component:SystemSetup,
+        name:'systemSetup',
+        meta:{
+            requiresAuth:true
+        }
+    },
+    {
         path:'/employee',
         component:Employee,
         name:'employee',
@@ -46,8 +56,19 @@ export default [
         name:'settings',
         meta:{
             requiresAuth:true
-        }
+        },
+        children:[
+            {
+                path:'roleSetup',
+                component:RoleSetup,
+                name:'roleSetup',
+                meta:{
+                    requiresAuth:true
+                },
+            }
+        ]
     },
+
     /*{
         path:'addEmployee',
         component:EmployeeReg,

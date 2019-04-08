@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
         employees:[],
         httpLink: 'http://pos.test/api/',
         error:'',
+        roles:[],
         user_data:JSON.parse(localStorage.getItem('user_data'))||null
     },
     getters:{
@@ -37,6 +38,9 @@ export const store = new Vuex.Store({
         },
         addEmployee(){
 
+        },
+        showRoles(state, roles){
+            state.roles= roles;
         }
     },
     actions:{
@@ -73,7 +77,19 @@ export const store = new Vuex.Store({
                     reject(error);
                 })
             } )
-
+        },
+        showRoles(context){
+            let _this = this;
+            return new Promise((resolve, reject) =>{
+                axios.get(_this.state.httpLink + 'showRoles')
+                    .then(function (response) {
+                        context.commit('showRoles',response.data);
+                        resolve(response);
+                    }).catch(function (error) {
+                    console.log(error);
+                    reject(error);
+                })
+            } )
         },
         destroyToken(context){
             return new Promise((resolve, reject) =>{

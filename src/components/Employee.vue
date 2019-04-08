@@ -66,8 +66,6 @@
     import axios from 'axios';
     import NewEmployee from "./NewEmployee";
 
-
-
     export default {
         name: "Employee",
         components:{
@@ -77,7 +75,7 @@
         data() {
             return {
                 searchEmployee:'',
-                avatar_link:'http://localhost/bariwala/storage/app/public/',
+                avatar_link:'http://localhost/Laravel/bariwala/storage/app/public/',
             }
         },
         methods: {

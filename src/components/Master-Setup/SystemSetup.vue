@@ -1,10 +1,10 @@
 <template>
-    <h1>Master Setup</h1>
+    <h1>System Setup</h1>
 </template>
 
 <script>
     export default {
-        name: "MasterSetup"
+        name: "SystemSetup"
     }
 </script>
 

@@ -53,35 +53,43 @@
                 <ul class="sidebar-nav">
                     <li>
 
-                        <router-link to="dashboard">
+                        <router-link to="/dashboard">
                             <i class="material-icons" style="vertical-align: text-bottom">
                                 dashboard
                             </i><span> Dashboard</span></router-link>
                     </li>
 
                     <li>
-                        <router-link to="employee">
-                            <i class="material-icons" style="vertical-align: text-bottom">
-                                person_outline
-                            </i><span>  Employee</span>
-                        </router-link>
-                    </li>
-                    <li>
                        <!-- <a href="#" data-toggle="collapse" data-target="#toggleDemo" data-parent="#sidenav01" class="collapsed">
                             Submenu 1 <span class="caret pull-right"></span>
                         </a>-->
-                        <router-link to="masterSetup" data-toggle="collapse" data-target="#toggleDemo" class="collapsed">
+                        <router-link to="/masterSetup" data-toggle="collapse" data-target="#toggleDemo" class="collapsed">
                             <i class="material-icons" style="vertical-align: text-bottom">
                                 settings
                             </i><span>  Master Setup</span>
                         </router-link>
-                        <div class="collapse" id="toggleDemo" style="height: 0px;">
+                        <!--<div class="collapse" id="toggleDemo" style="height: 0px;">
                             <ul class="nav-item" style="padding: 0px">
-                                <li><a class="px-5" href="#">Submenu1.1</a></li>
-                                <li><a class="px-5" href="#">Submenu1.2</a></li>
-                                <li><a class="px-5" href="#">Submenu1.3</a></li>
+                                <li>
+                                    <router-link to="/systemSetup" class=" px-5">
+                                        <span>  System Setup</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/masterSetup/roleSetup" class=" px-5">
+                                        <span>  Role Setup</span>
+                                    </router-link>
+                                </li>
+                                <li><a class="px-5" href="#">Department Setup</a></li>
                             </ul>
-                        </div>
+                        </div>-->
+                    </li>
+                    <li>
+                        <router-link to="/employee">
+                            <i class="material-icons" style="vertical-align: text-bottom">
+                                person_outline
+                            </i><span>  Employee</span>
+                        </router-link>
                     </li>
                 </ul>
             </div>
