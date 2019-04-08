@@ -29,7 +29,10 @@
                             </div>
                             <div class="form-group col-md-5">
                                 <label for="designation">Designation</label>
-                                <input type="text" v-model="form.designation" class="form-control" id="designation" placeholder="Designation">
+                                <select class="form-control" id="designation">
+                                    <option v-for="(role,index) in $store.state.roles">{{role.role_name}}</option>
+
+                                </select>
                             </div>
                             <div class="form-group col-md-5">
                                 <label>Birth Date</label>
@@ -166,6 +169,7 @@
         },
         created() {
             console.log(this.$store.state.user_data.user_id);
+            this.$store.dispatch('showRoles');
         }
 
     }
