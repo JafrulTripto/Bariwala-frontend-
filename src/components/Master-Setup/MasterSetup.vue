@@ -12,8 +12,6 @@
                             </i>
                         </button>
                         <role-setup id="addRoleModal"></role-setup>
-
-
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -48,6 +46,16 @@
             </div>
             <div class="col-sm-6">
                 <div class="card">
+                    <div class="card-header text-white" style="background-color: #2c0635">
+
+                        <h4 class="d-inline">Product Unit Settings</h4>
+                        <button class="d-inline btn btn-success btn-sm float-right" data-toggle="modal" data-target="#addUnitModal">
+                            <i class="material-icons">
+                                add
+                            </i>
+                        </button>
+                        <product-unit id="addUnitModal"></product-unit>
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Special title treatment</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -64,9 +72,13 @@
 <script>
     import axios from 'axios';
     import RoleSetup from "./RoleSetup";
+    import productUnit from "./ProductUnit"
     export default {
         name: "MasterSetup",
-        components: {RoleSetup},
+        components: {
+            RoleSetup:RoleSetup,
+            productUnit:productUnit
+        },
 
         data(){
             return{

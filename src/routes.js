@@ -5,7 +5,7 @@ import SignOut from "./components/signOut"
 import dashboard from './components/companyDashboard'
 import Employee from "./components/Employee";
 import Settings from "./components/Master-Setup/MasterSetup"
-import SystemSetup from './components/Master-Setup/SystemSetup'
+import SystemSetup from './components/Master-Setup/ProductUnit'
 import RoleSetup from './components/Master-Setup/RoleSetup'
 
 

@@ -38,6 +38,7 @@
                 let _this = this;
                 axios.post(_this.$store.state.httpLink + 'addRole?role_name='+_this.role)
                     .then(function (response) {
+                        _this.$store.dispatch('showRoles');
                         _this.$toastr.success('New Role Added', 'Message',
                             {positionClass: "toast-bottom-right"});
                     }).catch(function (error) {

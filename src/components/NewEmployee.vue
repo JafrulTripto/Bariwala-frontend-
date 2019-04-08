@@ -30,8 +30,7 @@
                             <div class="form-group col-md-5">
                                 <label for="designation">Designation</label>
                                 <select class="form-control" id="designation">
-                                    <option v-for="(role,index) in $store.state.roles">{{role.role_name}}</option>
-
+                                    <option v-for="role in $store.state.roles">{{role.role_name}}</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-5">
