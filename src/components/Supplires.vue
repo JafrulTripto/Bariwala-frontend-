@@ -183,9 +183,9 @@
             suppliersFilter() {
                 let _this = this;
                 //console.log(_this.$store.getters.databaseRead);
-                return _this.suppliers.filter(suppliers => {
-                    if (_this.searchEmployee) {
-                        return suppliers.name.toLowerCase().includes(_this.searchEmployee.toLowerCase())
+                return _this.suppliers.filter(supplier => {
+                    if (_this.searchSupplier) {
+                        return supplier.sup_name.toLowerCase().includes(_this.searchSupplier.toLowerCase())
                     } else
                         return true;
                 });
