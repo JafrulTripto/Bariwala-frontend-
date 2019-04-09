@@ -6,10 +6,10 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-10 col-md-4 col-lg-4">
+                    <div class="col-sm-12 col-md-4 col-lg-4 py-1">
                         <input type="email" class="form-control" v-model="searchEmployee" placeholder="Search">
                     </div>
-                    <div class="clearfix col-lg-8">
+                    <div class="col-lg-8 col-sm-12 col-md-8 py-1">
                         <button class="float-right btn btn-success" data-toggle="modal" data-target="#addEmpModal">Add employee</button>
                     </div>
                     <NewEmployee id="addEmpModal"></NewEmployee>
@@ -79,10 +79,10 @@
             }
         },
         methods: {
-            addEmployee() {
+           /* addEmployee() {
                 this.$router.push('addEmployee')
 
-            },
+            },*/
            /* showEmployee() {
                 let _this = this;
                 axios.get(_this.$store.state.httpLink + 'showEmployee')

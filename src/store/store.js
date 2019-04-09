@@ -11,6 +11,8 @@ export const store = new Vuex.Store({
         httpLink: 'http://pos.test/api/',
         error:'',
         roles:[],
+        units:[],
+        categories:[],
         user_data:JSON.parse(localStorage.getItem('user_data'))||null
     },
     getters:{
@@ -41,6 +43,12 @@ export const store = new Vuex.Store({
         },
         showRoles(state, roles){
             state.roles= roles;
+        },
+        showUnits(state, units){
+            state.units = units;
+        },
+        showCategories(state, categories){
+            state.categories = categories;
         }
     },
     actions:{
@@ -84,6 +92,32 @@ export const store = new Vuex.Store({
                 axios.get(_this.state.httpLink + 'showRoles')
                     .then(function (response) {
                         context.commit('showRoles',response.data);
+                        resolve(response);
+                    }).catch(function (error) {
+                    console.log(error);
+                    reject(error);
+                })
+            } )
+        },
+        showUnits(context){
+            let _this = this;
+            return new Promise((resolve, reject) =>{
+                axios.get(_this.state.httpLink + 'showUnits')
+                    .then(function (response) {
+                        context.commit('showUnits',response.data);
+                        resolve(response);
+                    }).catch(function (error) {
+                    console.log(error);
+                    reject(error);
+                })
+            } )
+        },
+        showCategories(context){
+            let _this = this;
+            return new Promise((resolve, reject) =>{
+                axios.get(_this.state.httpLink + 'showCategories')
+                    .then(function (response) {
+                        context.commit('showCategories',response.data);
                         resolve(response);
                     }).catch(function (error) {
                     console.log(error);

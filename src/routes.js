@@ -7,6 +7,7 @@ import Employee from "./components/Employee";
 import Settings from "./components/Master-Setup/MasterSetup"
 import SystemSetup from './components/Master-Setup/ProductUnit'
 import RoleSetup from './components/Master-Setup/RoleSetup'
+import Suppliers from './components/Supplires'
 
 
 export default [
@@ -30,6 +31,14 @@ export default [
         path:'/dashboard',
         component:dashboard,
         name:'dashboard',
+        meta:{
+            requiresAuth:true
+        }
+    },
+    {
+        path:'/suppliers',
+        component:Suppliers,
+        name:'suppliers',
         meta:{
             requiresAuth:true
         }

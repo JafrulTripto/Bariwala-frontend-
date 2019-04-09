@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group col-md-5">
                                 <label for="designation">Designation</label>
-                                <select class="form-control" id="designation">
+                                <select class="form-control" id="designation" v-model="form.designation">
                                     <option v-for="role in $store.state.roles">{{role.role_name}}</option>
                                 </select>
                             </div>
@@ -85,7 +85,6 @@
 
 <script>
     import moment from 'moment'
-    import axios from 'axios'
 
     export default {
 

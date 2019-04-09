@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav v-if="$store.getters.isLoggedIn" class="navbar navbar-expand-lg navbar-dark"
+        <nav v-if="$store.getters.isLoggedIn" class="navbar fixed-top navbar-expand-lg navbar-dark"
              style="background-color: #2c0635">
             <button class="btn btn-success mr-5" type="button" @click="sidebar=!sidebar">
                 <span class="navbar-toggler-icon"></span>
@@ -49,7 +49,7 @@
         </nav>
 
         <div id="wrapper">
-            <div v-if="$store.getters.isLoggedIn" id="sidebar-wrapper" :class="toggleSidebar">
+            <div v-if="$store.getters.isLoggedIn" id="sidebar-wrapper" :class="toggleSidebar" class="mt-5 pt-3">
                 <ul class="sidebar-nav">
                     <li>
 
@@ -91,10 +91,17 @@
                             </i><span>  Employee</span>
                         </router-link>
                     </li>
+                    <li>
+                        <router-link to="/suppliers">
+                            <i class="material-icons" style="vertical-align: text-bottom">
+                                person_pin
+                            </i><span>  Suppliers</span>
+                        </router-link>
+                    </li>
                 </ul>
             </div>
         </div>
-        <div id="page-content-wrapper" :class="toggledContent">
+        <div id="page-content-wrapper" :class="toggledContent" class="mt-5">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -138,7 +145,7 @@
 
     #sidebar-wrapper {
         z-index: 1000;
-        position: absolute;
+        position: fixed;
         width: 0px;
         height: 100%;
         overflow-y: hidden;
