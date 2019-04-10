@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
         error:'',
         roles:[],
         units:[],
+        suppliers:[],
         categories:[],
         user_data:JSON.parse(localStorage.getItem('user_data'))||null
     },
@@ -49,6 +50,9 @@ export const store = new Vuex.Store({
         },
         showCategories(state, categories){
             state.categories = categories;
+        },
+        showSuppliers(state, suppliers){
+            state.suppliers = suppliers;
         }
     },
     actions:{
@@ -120,7 +124,18 @@ export const store = new Vuex.Store({
                         context.commit('showCategories',response.data);
                         resolve(response);
                     }).catch(function (error) {
-                    console.log(error);
+                    reject(error);
+                })
+            } )
+        },
+        showSuppliers(context){
+            let _this = this;
+            return new Promise((resolve, reject) =>{
+                axios.get(_this.state.httpLink + 'showSuppliers')
+                    .then(function (response) {
+                        context.commit('showSuppliers',response.data);
+                        resolve(response);
+                    }).catch(function (error) {
                     reject(error);
                 })
             } )

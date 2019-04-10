@@ -8,6 +8,7 @@ import Settings from "./components/Master-Setup/MasterSetup"
 import SystemSetup from './components/Master-Setup/ProductUnit'
 import RoleSetup from './components/Master-Setup/RoleSetup'
 import Suppliers from './components/Supplires'
+import Products from './components/Product'
 
 
 export default [
@@ -39,6 +40,14 @@ export default [
         path:'/suppliers',
         component:Suppliers,
         name:'suppliers',
+        meta:{
+            requiresAuth:true
+        }
+    },
+    {
+        path:'/products',
+        component:Products,
+        name:'Products',
         meta:{
             requiresAuth:true
         }

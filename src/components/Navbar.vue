@@ -98,6 +98,13 @@
                             </i><span>  Suppliers</span>
                         </router-link>
                     </li>
+                    <li>
+                        <router-link to="/products">
+                            <i class="material-icons" style="vertical-align: text-bottom">
+                                shopping_basket
+                            </i><span>  Products</span>
+                        </router-link>
+                    </li>
                 </ul>
             </div>
         </div>

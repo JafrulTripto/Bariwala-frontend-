@@ -2,22 +2,22 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header text-white" style="background-color: #2c0635">
-                <h3 class="h3">Supplier</h3>
+                <h3 class="h3">Product</h3>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-10 col-md-4 col-lg-4">
-                        <input type="email" class="form-control" v-model="searchSupplier" placeholder="Search">
+                        <input type="email" class="form-control" v-model="searchProduct" placeholder="Search">
                     </div>
                     <div class="clearfix col-lg-8">
-                        <button class="float-right btn btn-success" data-toggle="modal" data-target="#supplierModal">Add Supplier</button>
+                        <button class="float-right btn btn-success" data-toggle="modal" data-target="#productModal">Add Product</button>
                     </div>
 
-                    <div class="modal fade" id="supplierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header text-white" style="background-color: #2c0635" >
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Add Supplier</h5>
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Add Product</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span class="text-white" aria-hidden="true">&times;</span>
                                     </button>
@@ -26,32 +26,45 @@
                                     <div class=" modal-body col-md-12 ">
                                         <form class="row d-flex justify-content-center">
                                             <div class="form-group col-md-5">
-                                                <label for="exampleInputEmail1">Supplier Name</label>
-                                                <input type="text" v-model="form.name" class="form-control" id="nameInput" placeholder="Enter Name">
+                                                <label for="nameInput">Product Name</label>
+                                                <input type="text" v-model="form.product_name" class="form-control" id="nameInput" placeholder="Enter Name">
                                             </div>
                                             <div class="form-group col-md-5">
-                                                <label for="exampleInputEmail1">Supplier Email address</label>
-                                                <input type="email" v-model="form.email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                                <label for="barcode">Barcode</label>
+                                                <input type="text" v-model="form.product_barcode" class="form-control" id="barcode" placeholder="Enter Name">
+                                            </div>
+                                            <div class="form-group col-md-5">
+                                                <label for="suppliers">Supplier Name</label>
+                                                <select class="form-control" id="suppliers" v-model="form.supplier_id">
+                                                    <option :value="supplier.id" v-for="supplier in $store.state.suppliers">{{supplier.sup_name}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-5">
+                                                <label for="category">Category</label>
+                                                <select class="form-control" id="category" v-model="form.category_id">
+                                                    <option :value="supplier.category.id" v-for="supplier in $store.state.suppliers">{{supplier.category.category_name}}</option>
+                                                </select>
                                             </div>
 
                                             <div class="form-group col-md-5">
-                                                <label for="NidNumber">Contact Person</label>
-                                                <input type="text" v-model="form.contactPerson" class="form-control" id="NidNumber" placeholder="NID Number">
+                                                <label for="Phone">Buying Price</label>
+                                                <input type="text" v-model="form.buying_price" class="form-control" id="Phone" placeholder="Phone Number">
                                             </div>
                                             <div class="form-group col-md-5">
-                                                <label for="Phone">Contact Phone Number</label>
-                                                <input type="text" v-model="form.phn_no" class="form-control" id="Phone" placeholder="Phone Number">
-                                            </div>
-                                            <div class="form-group col-md-10">
-                                                <label for="address">Address</label>
-                                                <textarea v-model="form.address" class="form-control" placeholder="Address" id="address"></textarea>
+                                                <label for="sellingPrice">Selling Price</label>
+                                                <input type="text" v-model="form.selling_price" class="form-control" placeholder="Buying Price" id="sellingPrice">
                                             </div>
                                             <div class="form-group col-md-5">
-                                                <label for="designation">Category</label>
-                                                <select class="form-control" id="designation" v-model="form.category">
-                                                    <option v-for="category in $store.state.categories" :value="category.id">{{category.category_name}}</option>
+                                                <label for="NidNumber">Quantity</label>
+                                                <input type="text" v-model="form.quantity" class="form-control" id="NidNumber" placeholder="Qty">
+                                            </div>
+                                            <div class="form-group col-md-5">
+                                                <label for="unit">Unit</label>
+                                                <select class="form-control" id="unit" v-model="form.unit_id">
+                                                    <option :value="unit.id" v-for="unit in $store.state.units">{{unit.unit_name}}</option>
                                                 </select>
                                             </div>
+
 
                                         </form>
                                     </div>
@@ -67,7 +80,7 @@
                                     <button type="button"
                                             class="btn btn-primary"
                                             data-dismiss="modal"
-                                            @click="addSupplier">
+                                            @click="addProduct">
                                         <i class="material-icons" style="vertical-align: text-bottom">
                                             save_alt
                                         </i> SAVE</button>
@@ -79,7 +92,7 @@
                 </div>
             </div>
         </div>
-        <div class="card mt-3">
+       <!-- <div class="card mt-3">
             <div class="card-header text-white"  style="background-color: #2c0635">
                 <h3 class="h3">Supplier List</h3>
             </div>
@@ -102,7 +115,7 @@
                             <th scope="row">{{supplier.id}}</th>
                             <td>{{supplier.sup_name}}</td>
                             <td>{{supplier.sup_email}}</td>
-                            <td>{{supplier.category.category_name}}</td>
+                            <td>{{supplier.category}}</td>
                             <td>{{supplier.sup_contactPerson}}</td>
                             <td>{{supplier.sup_contactPhoneNo}}</td>
 
@@ -121,7 +134,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </template>
 <script>
@@ -135,37 +148,39 @@
         data() {
             return {
                 form: {
-                    name: '',
-                    email: '',
-                    contactPerson: '',
-                    address: '',
-                    phn_no: '',
-                    category: ''
+                    product_name: '',
+                    product_barcode: '',
+                    category_id: '',
+                    supplier_id: '',
+                    unit_id: '',
+                    buying_price: '',
+                    selling_price: '',
+                    quantity:''
                 },
-                searchSupplier: '',
-                suppliers:[]
+                searchProduct: '',
             }
         },
         methods: {
-            addSupplier() {
+            addProduct() {
                 let _this = this;
-                axios.post(_this.$store.state.httpLink + 'addSupplier', _this.form)
+                axios.post(_this.$store.state.httpLink + 'addProduct', _this.form)
                     .then(function (response) {
+                        _this.form='';
                         _this.$toastr.error('Supplier Added', 'Message',
                             {positionClass: "toast-bottom-right"});
                     }).catch(function (error) {
                     console.log(error);
                 })
             },
-             /*showSuppliers() {
-                 let _this = this;
-                 axios.get(_this.$store.state.httpLink + 'showSuppliers')
-                     .then(function (response) {
-                         _this.suppliers = response.data;
-                     }).catch(function (error) {
-                     console.log(error);
-                 })
-             },*/
+           /* showSuppliers() {
+                let _this = this;
+                axios.get(_this.$store.state.httpLink + 'showSuppliers')
+                    .then(function (response) {
+                        _this.suppliers = response.data;
+                    }).catch(function (error) {
+                    console.log(error);
+                })
+            },*/
             /* deleteEmp(id, key) {
                 let _this = this;
                 console.log(id, key)
@@ -183,7 +198,7 @@
             suppliersFilter() {
                 let _this = this;
                 //console.log(_this.$store.getters.databaseRead);
-                return _this.$store.state.suppliers.filter(supplier => {
+                return _this.suppliers.filter(supplier => {
                     if (_this.searchSupplier) {
                         return supplier.sup_name.toLowerCase().includes(_this.searchSupplier.toLowerCase())
                     } else
@@ -193,18 +208,13 @@
 
         },
         created() {
-            this.$store.dispatch('showCategories');
-            this.$store.dispatch('showSuppliers');
+            this.$store.dispatch('showUnits');
+
         }
     }
 
 </script>
 
 <style scoped>
-    .avatar {
-        vertical-align: middle;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-    }
+
 </style>
