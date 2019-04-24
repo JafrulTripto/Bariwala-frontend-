@@ -63,26 +63,39 @@
                        <!-- <a href="#" data-toggle="collapse" data-target="#toggleDemo" data-parent="#sidenav01" class="collapsed">
                             Submenu 1 <span class="caret pull-right"></span>
                         </a>-->
-                        <router-link to="/masterSetup" data-toggle="collapse" data-target="#toggleDemo" class="collapsed">
+                        <a data-toggle="collapse" data-target="#toggleDemo" class="collapsed text-white">
                             <i class="material-icons" style="vertical-align: text-bottom">
-                                settings
+                                list
                             </i><span>  Master Setup</span>
-                        </router-link>
-                        <!--<div class="collapse" id="toggleDemo" style="height: 0px;">
+                        </a>
+                        <div class="collapse" id="toggleDemo" style="height: 0px;">
                             <ul class="nav-item" style="padding: 0px">
                                 <li>
-                                    <router-link to="/systemSetup" class=" px-5">
-                                        <span>  System Setup</span>
+                                    <router-link to="/masterSetup/productSetup" class=" px-3">
+                                        <i class="material-icons" style="vertical-align: text-bottom">
+                                            shopping_basket
+                                        </i>
+                                        <span>  Product Setup</span>
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/masterSetup/roleSetup" class=" px-5">
+                                    <router-link to="/masterSetup/roleSetup" class=" px-3">
+                                        <i class="material-icons" style="vertical-align: text-bottom">
+                                            supervised_user_circle
+                                        </i>
                                         <span>  Role Setup</span>
                                     </router-link>
                                 </li>
-                                <li><a class="px-5" href="#">Department Setup</a></li>
+                                <li>
+                                    <router-link to="/masterSetup/categorySetup" class=" px-3">
+                                        <i class="material-icons" style="vertical-align: text-bottom">
+                                            category
+                                        </i>
+                                        <span>  Category Setup</span>
+                                    </router-link>
+                                </li>
                             </ul>
-                        </div>-->
+                        </div>
                     </li>
                     <li>
                         <router-link to="/employee">

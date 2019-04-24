@@ -130,6 +130,7 @@
                 this.$store.dispatch('addEmployee',this.form).then(response=>{
                     this.$toastr.success('New Employee Added', 'Message',
                         {positionClass: "toast-bottom-right"});
+                    this.form = {};
                     this.$store.dispatch('showEmployee');
                 })
                /* let _this= this;

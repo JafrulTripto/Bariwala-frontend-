@@ -75,7 +75,7 @@
         data() {
             return {
                 searchEmployee:'',
-                avatar_link:'http://localhost/Laravel/bariwala/storage/app/public/',
+                avatar_link:'http://localhost/bariwala/storage/app/public/',
             }
         },
         methods: {

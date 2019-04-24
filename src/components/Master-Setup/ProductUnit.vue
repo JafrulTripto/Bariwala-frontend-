@@ -77,7 +77,7 @@
     import axios from 'axios';
 
     export default {
-        name: "SystemSetup",
+        name: "ProductSetup",
         data() {
             return {
                 unit: ''
@@ -89,8 +89,9 @@
                 axios.post(_this.$store.state.httpLink + 'addUnit?unit_name=' + _this.unit)
                     .then(function (response) {
                         _this.$store.dispatch('showUnits');
-                        _this.$toastr.success('New Role Added', 'Message',
+                        _this.$toastr.success('New Product Unit Added', 'Message',
                             {positionClass: "toast-bottom-right"});
+                        _this.unit = '';
                     }).catch(function (error) {
                     console.log(error);
                 })

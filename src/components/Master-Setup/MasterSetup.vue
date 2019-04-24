@@ -1,14 +1,9 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <role-setup></role-setup>
-                <product-unit></product-unit>
+            <div class="col-lg-8">
+                <router-view></router-view>
             </div>
-            <div class="col-lg-6">
-                <category-setup></category-setup>
-            </div>
-
         </div>
     </div>
 

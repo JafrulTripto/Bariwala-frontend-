@@ -90,6 +90,7 @@
                         _this.$toastr.success('New Category Added', 'Message',
                             {positionClass: "toast-bottom-right"});
                         _this.category='';
+                        console.log(_this.category);
                     }).catch(function (error) {
                     console.log(error);
                 })

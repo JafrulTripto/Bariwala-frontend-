@@ -83,6 +83,7 @@
                         _this.$store.dispatch('showRoles');
                         _this.$toastr.success('New Role Added', 'Message',
                             {positionClass: "toast-bottom-right"});
+                        _this.role = '';
                     }).catch(function (error) {
                     console.log(error);
                 })

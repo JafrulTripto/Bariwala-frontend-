@@ -36,7 +36,7 @@
 
                                             <div class="form-group col-md-5">
                                                 <label for="NidNumber">Contact Person</label>
-                                                <input type="text" v-model="form.contactPerson" class="form-control" id="NidNumber" placeholder="NID Number">
+                                                <input type="text" v-model="form.contactPerson" class="form-control" id="NidNumber" placeholder="Contact Person">
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label for="Phone">Contact Phone Number</label>
@@ -151,6 +151,7 @@
                 let _this = this;
                 axios.post(_this.$store.state.httpLink + 'addSupplier', _this.form)
                     .then(function (response) {
+                        _this.$store.dispatch('showSuppliers');
                         _this.$toastr.error('Supplier Added', 'Message',
                             {positionClass: "toast-bottom-right"});
                     }).catch(function (error) {

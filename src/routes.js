@@ -5,10 +5,11 @@ import SignOut from "./components/signOut"
 import dashboard from './components/companyDashboard'
 import Employee from "./components/Employee";
 import Settings from "./components/Master-Setup/MasterSetup"
-import SystemSetup from './components/Master-Setup/ProductUnit'
+import ProductSetup from './components/Master-Setup/ProductUnit'
 import RoleSetup from './components/Master-Setup/RoleSetup'
 import Suppliers from './components/Supplires'
 import Products from './components/Product'
+import CategorySetup from './components/Master-Setup/CatagorySetup'
 
 
 export default [
@@ -52,14 +53,7 @@ export default [
             requiresAuth:true
         }
     },
-    {
-        path:'/systemSetup',
-        component:SystemSetup,
-        name:'systemSetup',
-        meta:{
-            requiresAuth:true
-        }
-    },
+
     {
         path:'/employee',
         component:Employee,
@@ -83,7 +77,23 @@ export default [
                 meta:{
                     requiresAuth:true
                 },
-            }
+            },
+            {
+                path:'productSetup',
+                component:ProductSetup,
+                name:'productSetup',
+                meta:{
+                    requiresAuth:true
+                }
+            },
+            {
+                path:'categorySetup',
+                component:CategorySetup,
+                name:'categorySetup',
+                meta:{
+                    requiresAuth:true
+                }
+            },
         ]
     },
 
