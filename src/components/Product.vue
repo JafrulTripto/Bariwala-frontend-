@@ -35,14 +35,14 @@
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label for="suppliers">Supplier Name</label>
-                                                <select class="form-control" id="suppliers" v-model="form.supplier_id">
-                                                    <option :value="supplier.id" v-for="supplier in $store.state.suppliers">{{supplier.sup_name}}</option>
+                                                <select @change="onChange" class="form-control" id="suppliers" v-model="form.supplier_id">
+                                                    <option :value="supplier.id" v-for="(supplier,index) in $store.state.suppliers" :key="index">{{supplier.sup_name}}</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label for="category">Category</label>
                                                 <select class="form-control" id="category" v-model="form.category_id">
-                                                    <option :value="supplier.category.id" v-for="supplier in $store.state.suppliers">{{supplier.category.category_name}}</option>
+                                                    <option :value="supplier.category.id" v-for="supplier in $store.state.suppliers" >{{supplier.category.category_name}}</option>
                                                 </select>
                                             </div>
 
@@ -158,6 +158,7 @@
                     quantity:''
                 },
                 searchProduct: '',
+                selectedSupplier:''
             }
         },
         methods: {
@@ -172,6 +173,10 @@
                     console.log(error);
                 })
             },
+            onChange(event) {
+               this.selectedSupplier = event.target.selectedIndex;
+                console.log(this.selectedSupplier)
+            }
            /* showSuppliers() {
                 let _this = this;
                 axios.get(_this.$store.state.httpLink + 'showSuppliers')
@@ -209,7 +214,7 @@
         },
         created() {
             this.$store.dispatch('showUnits');
-
+            console.log(this.$store.state.suppliers)
         }
     }
 
