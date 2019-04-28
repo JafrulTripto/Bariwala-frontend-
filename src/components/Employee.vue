@@ -105,7 +105,7 @@
             }
 
         },
-        computed: {
+      /*  computed: {
             tasks() {
                 let _this = this;
                 //console.log(_this.$store.getters.databaseRead);
@@ -117,7 +117,7 @@
                 });
             },
 
-        },
+        },*/
         created() {
                  this.$store.dispatch('showEmployee');
         }

@@ -12,25 +12,41 @@
                     <div class=" modal-body col-md-12 ">
                         <form class="row d-flex justify-content-center">
                             <div class="form-group col-md-5">
-                                <label for="exampleInputEmail1">Name</label>
-                                <input type="text" v-model="form.name" class="form-control" id="nameInput" placeholder="Enter Name">
+                                <label for="first_name">First Name</label>
+                                <input type="text" v-model="form.first_name" class="form-control" id="first_name" placeholder="Enter First Name">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="last_name">First Name</label>
+                                <input type="text" v-model="form.last_name" class="form-control" id="last_name" placeholder="Enter Last Name">
                             </div>
                             <div class="form-group col-md-5">
                                 <label for="exampleInputEmail1">Email address</label>
                                 <input type="email" v-model="form.email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                             </div>
                             <div class="form-group col-md-5">
-                                <label for="password">Password</label>
-                                <input type="password" v-model="form.password" class="form-control" id="password" placeholder="Password">
+                                <label for="house">House No</label>
+                                <input type="text" v-model="form.house_no" class="form-control" id="house" placeholder="Enter House No">
                             </div>
                             <div class="form-group col-md-5">
-                                <label for="confirmPassword">Confirm Password</label>
-                                <input type="password" v-model="form.confirmPass" class="form-control" id="confirmPassword" placeholder="Password">
+                                <label for="road">Road No</label>
+                                <input type="text" v-model="form.road_no" class="form-control" id="road" placeholder="Enter Road No">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="postal_code">Postal Code</label>
+                                <input type="text" v-model="form.postal_code" class="form-control" id="postal_code" placeholder="Enter Postal Code">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="thana">Thana</label>
+                                <input type="text" v-model="form.thana" class="form-control" id="thana" placeholder="Enter Thana">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="district">District</label>
+                                <input type="text" v-model="form.district" class="form-control" id="district" placeholder="Enter District">
                             </div>
                             <div class="form-group col-md-5">
                                 <label for="designation">Designation</label>
                                 <select class="form-control" id="designation" v-model="form.designation">
-                                    <option v-for="role in $store.state.roles">{{role.role_name}}</option>
+                                    <option :value="designation.id" v-for="designation in $store.state.designations">{{designation.designation_name}}</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-5">
@@ -49,10 +65,6 @@
                             <div class="form-group col-md-5">
                                 <label for="Phone">Phone Number</label>
                                 <input type="text" v-model="form.phn_no" class="form-control" id="Phone" placeholder="Phone Number">
-                            </div>
-                            <div class="form-group col-md-10">
-                                <label for="address">Address</label>
-                                <textarea v-model="form.address" class="form-control" placeholder="Address" id="address"></textarea>
                             </div>
                             <div class="form-group custom-file col-md-6">
                                 <input type="file" class="custom-file-input" v-on:change="onImageChange" id="customFile">
@@ -91,15 +103,17 @@
         data() {
             return {
                 form: {
-                    name: '',
+                    first_name: '',
+                    last_name: '',
                     email: '',
-                    NID_no: null,
-                    password: '',
-                    confirmPass: '',
-                    is_admin:false,
+                    house_no: '',
+                    road_no: '',
+                    postal_code: '',
+                    thana: '',
+                    district: '',
+                    NID_no: '',
                     date_of_birth: '',
                     designation: '',
-                    address:'',
                     phn_no:'',
                     image:'',
                 },
@@ -168,7 +182,7 @@
         },
         created() {
             console.log(this.$store.state.user_data.user_id);
-            this.$store.dispatch('showRoles');
+            this.$store.dispatch('showDesignation');
         }
 
     }

@@ -10,7 +10,7 @@ export const store = new Vuex.Store({
         employees:[],
         httpLink: 'http://pos.test/api/',
         error:'',
-        roles:[],
+        designations:[],
         units:[],
         suppliers:[],
         categories:[],
@@ -42,8 +42,8 @@ export const store = new Vuex.Store({
         addEmployee(){
 
         },
-        showRoles(state, roles){
-            state.roles= roles;
+        showDesignation(state, roles){
+            state.designations= roles;
         },
         showUnits(state, units){
             state.units = units;
@@ -90,12 +90,12 @@ export const store = new Vuex.Store({
                 })
             } )
         },
-        showRoles(context){
+        showDesignation(context){
             let _this = this;
             return new Promise((resolve, reject) =>{
-                axios.get(_this.state.httpLink + 'showRoles')
+                axios.get(_this.state.httpLink + 'showDesignation')
                     .then(function (response) {
-                        context.commit('showRoles',response.data);
+                        context.commit('showDesignation',response.data);
                         resolve(response);
                     }).catch(function (error) {
                     console.log(error);

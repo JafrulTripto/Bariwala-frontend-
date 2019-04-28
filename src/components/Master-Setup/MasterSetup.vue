@@ -32,7 +32,7 @@
 
         },
         created() {
-            this.$store.dispatch('showRoles');
+            this.$store.dispatch('showDesignation');
             this.$store.dispatch('showUnits');
             this.$store.dispatch('showCategories');
         }

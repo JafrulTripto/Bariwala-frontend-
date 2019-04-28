@@ -21,7 +21,7 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="newRole" class="text-dark">New Role</label>
-                                    <input type="text" class="form-control" id="newRole" placeholder="Role" v-model="role">
+                                    <input type="text" class="form-control" id="newRole" placeholder="Role" v-model="designation_name">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -43,9 +43,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(role,index) in $store.state.roles">
-                            <th>{{role.id}}</th>
-                            <td>{{role.role_name}}</td>
+                        <tr v-for="(designation,index) in $store.state.designations">
+                            <th>{{designation.id}}</th>
+                            <td>{{designation.designation_name}}</td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-danger" @click="deleteRole(role.id)">
@@ -72,18 +72,18 @@
 
         data(){
             return{
-                role:''
+                designation_name:''
             }
         },
         methods:{
             addNewRole(){
                 let _this = this;
-                axios.post(_this.$store.state.httpLink + 'addRole?role_name='+_this.role)
+                axios.post(_this.$store.state.httpLink + 'addDesignation?designation_name='+_this.designation_name)
                     .then(function (response) {
-                        _this.$store.dispatch('showRoles');
+                        _this.$store.dispatch('showDesignation');
                         _this.$toastr.success('New Role Added', 'Message',
                             {positionClass: "toast-bottom-right"});
-                        _this.role = '';
+                        _this.designation_name = '';
                     }).catch(function (error) {
                     console.log(error);
                 })
@@ -92,7 +92,7 @@
                 let _this = this;
                 axios.post(_this.$store.state.httpLink +'deleteRole?id='+id)
                     .then(function (response) {
-                        _this.$store.dispatch('showRoles');
+                        _this.$store.dispatch('showDesignation');
                         _this.$toastr.error('Role Deleted', 'Message',
                             {positionClass: "toast-bottom-right"});
                     }).catch(function (error) {
