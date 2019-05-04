@@ -157,6 +157,9 @@
                     toggledPageContent: this.sidebar
                 }
             }
+        },
+        created() {
+            console.log(this.$store.state.user_data)
         }
     }
 </script>
